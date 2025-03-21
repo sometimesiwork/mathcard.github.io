@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн Курс по Математике - Карточка с задачами</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #35424a;
+            color: white;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: 3px solid #e8491d;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        header ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+
+        header #branding {
+            float: left;
+        }
+
+        header #branding h1 {
+            margin: 0;
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        header .highlight, header .current a {
+            color: #e8491d;
+            font-weight: bold;
+        }
+
+        #content-area {
+            padding: 20px;
+            background: #fff;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        #content-area h2 {
+            color: #e8491d;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        #content-area p {
+            margin-bottom: 15px;
+        }
+
+        #content-area ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        #content-area ol {
+            list-style-type: decimal;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        #quiz-area {
+            display: none; /* Initially hidden */
+        }
+
+        #contact-area {
+            display: none; /* Initially hidden */
+        }
+
+        footer {
+            padding: 20px;
+            margin-top: 20px;
+            color: white;
+            background-color: #e8491d;
+            text-align: center;
+        }
+
+        .lesson-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .lesson-section h3 {
+            color: #35424a;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 5px;
+        }
+
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .quiz-question h4 {
+            margin-bottom: 10px;
+            color: #35424a;
+        }
+
+        .quiz-options label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .quiz-submit-button {
+            background-color: #e8491d;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .quiz-submit-button:hover {
+            background-color: #c83a16;
+        }
+
+        #quiz-results {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: none; /* Initially hidden */
+        }
+
+        #contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        #contact-form input[type="text"],
+        #contact-form input[type="email"],
+        #contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #contact-form textarea {
+            height: 150px;
+        }
+
+        #contact-form button {
+            background-color: #e8491d;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #contact-form button:hover {
+            background-color: #c83a16;
+        }
+
+        .math-card {
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .math-problem {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .math-problem:last-child {
+            border-bottom: none;
+        }
+
+    </style>
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Математический</span> Курс</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="#" data-section="home">Главная</a></li>
+                    <li><a href="#" data-section="lessons">Уроки</a></li>
+                    <li><a href="#" data-section="problems">Задачи</a></li>
+                    <li><a href="#" data-section="quiz">Тест</a></li>
+                    <li><a href="#" data-section="contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="content-area" class="container">
+        <section id="home-area">
+            <h2>Добро пожаловать на наш Онлайн Курс по Математике!</h2>
+            <p>Этот курс разработан, чтобы помочь вам улучшить ваши знания и навыки в математике. Мы охватываем широкий спектр тем, от основ арифметики до более сложных концепций алгебры и геометрии.</p>
+            <p>Начните свой путь к математическому мастерству прямо сейчас! Перейдите в раздел "Уроки", чтобы начать обучение, или посмотрите карточку с задачами в разделе "Задачи".</p>
+        </section>
+
+        <section id="lessons-area" style="display: none;">
+            <h2>Уроки</h2>
+
+            <section class="lesson-section">
+                <h3>Урок 1: Основы Арифметики</h3>
+                <p>В этом уроке мы рассмотрим основные операции арифметики: сложение, вычитание, умножение и деление. Мы также обсудим порядок операций и как применять их для решения простых математических задач.</p>
+                <ul>
+                    <li>Сложение и его свойства</li>
+                    <li>Вычитание и его применение</li>
+                    <li>Умножение и таблицы умножения</li>
+                    <li>Деление и связь с умножением</li>
+                    <li>Порядок операций (PEMDAS/BODMAS)</li>
+                </ul>
+            </section>
+
+            <section class="lesson-section">
+                <h3>Урок 2: Введение в Алгебру</h3>
+                <p>Этот урок является введением в алгебру. Мы изучим переменные, выражения и уравнения. Вы научитесь упрощать алгебраические выражения и решать простые линейные уравнения.</p>
+                <ul>
+                    <li>Что такое переменные и константы</li>
+                    <li>Алгебраические выражения и их упрощение</li>
+                    <li>Линейные уравнения и методы их решения</li>
+                    <li>Решение задач с помощью уравнений</li>
+                </ul>
+            </section>
+
+            <section class="lesson-section">
+                <h3>Урок 3: Основы Геометрии</h3>
+                <p>В этом уроке мы познакомимся с основными геометрическими фигурами и понятиями, такими как точки, линии, углы, треугольники и круги. Мы также рассмотрим, как измерять углы и длины.</p>
+                <ul>
+                    <li>Основные геометрические фигуры: точки, линии, плоскости</li>
+                    <li>Углы и их типы</li>
+                    <li>Треугольники: виды и свойства</li>
+                    <li>Круги и их элементы: радиус, диаметр, окружность, площадь</li>
+                    <li>Измерение углов и длин</li>
+                </ul>
+            </section>
+             <!-- Добавьте больше уроков по аналогии -->
+        </section>
+
+        <section id="problems-area" style="display: none;">
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Решите систему уравнений</h4>
+                    <p>$$
+                        \begin{cases}
+                        \frac{2}{3}p - \frac{3}{5}q = -1 \\
+                        \frac{5}{9}p + \frac{7}{10}q = 6
+                        \end{cases}
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Найдите координаты точки пересечения графиков уравнений</h4>
+                    <p>$$
+                        \begin{cases}
+                        1.2x = 3 \\
+                        2y = -5
+                        \end{cases}
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Упростите выражение</h4>
+                    <p>$$
+                        \left( \frac{3d+1}{2d+2} - 1 \right) \div \frac{6d-6}{d+1}
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: Найдите значение дроби</h4>
+                    <p>$$
+                        \frac{c^6 - 1}{d^4 + 2}, \text{ при } c = -2, d = 1
+                    $$</p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Найдите значение выражения</h4>
+                    <p>$$
+                        (-50,4 : -5 \frac{5}{7} + 6,4) \cdot 14,4
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Решите уравнение</h4>
+                    <p>$$
+                        8,8 - (x + 4,9) = -18,6
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Упростите выражение</h4>
+                    <p>$$
+                        0,2(2,1x - 2,3y) - 0,4(3,1y + 1,9x)
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: Производительность труда повысилась на 25%. На сколько процентов уменьшится время выполнения задания.</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: Мне теперь вдвое больше лет, чем было тогда, когда мой брат был в моем возрасте. Теперь мне будет столько лет сколько сейчас брату, то нам вместе будет 98 лет. Сколько лет каждому?</h4>
+                    <p></p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Вычислите</h4>
+                    <p>$$
+                        (-5,8)^2 - 14,28 \cdot (- \frac{5}{7}) - 30,04
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Решите уравнение</h4>
+                    <p>$$
+                        -0,8 \cdot (a-1,5) = 6,4
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Упростите выражение</h4>
+                    <p>$$
+                        -29,4 \cdot (-\frac{2}{7}k) \cdot (-\frac{1}{4}) \cdot \frac{3}{7}p
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: Груши, содержащие 70% воды, при сушке потеряли 60% своей массы. Сколько процентов воды содержат сушеные груши?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: В кабинете были учебники по алгебре и геометрии. Количество учебников по геометрии составляло $\frac{3}{5}$ от кол-ва учебников по алгебре, а затем добавили 6 учебников по геометрии, то книг по этим предметам станет поровну. Сколько учебников по алгебре и геометрии вместе было в шкафу в кабинете математики?</h4>
+                    <p></p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Вычислите</h4>
+                    <p>$$
+                        (0,6 - \frac{14}{15}) \cdot \frac{6}{7} - (\frac{8}{35} - 0,8) : (-2\frac{2}{3})
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Найдите значение выражения, если $z = -1$,</h4>
+                    <p>$$
+                        z^2 - \frac{5}{16}
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Решите уравнение</h4>
+                    <p>$$
+                        \frac{5}{18} (0,54 - 7,2y) - \frac{4}{19} (0,76 - 3,8y) = 0,002
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: Первое число в 2,5 раза больше второго. Если к первому числу прибавить 1,5, а ко второму 8,4, то получатся одинаковые результаты. Найдите эти числа.</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: Для получения томат-пасты протертую массу томатов выпаривают в специальных машинах. Сколько томат-пасты, содержащей 30% воды, получится из 88т протертой массы томатов, содержащей 95% воды?</h4>
+                    <p></p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Найдите значение выражения</h4>
+                    <p>$$
+                        (0,6 - \frac{14}{15}) \cdot \frac{6}{7} - (\frac{8}{35} - 0,8) : (-2\frac{2}{3})
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Решите уравнение</h4>
+                    <p>$$
+                        0,29x + 0,78x - 2,1x - 0,4x = 15,75
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Упростите выражение</h4>
+                    <p>$$
+                        1,8 \cdot (\frac{5}{9} z - 0,8) - 1,2 \cdot (\frac{5}{6} z + 0,4)
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: Одна треть рабочих предприятия имела отпуск летом, 35% остальных рабочих отдыхали осенью, а еще 2314 человек отдыхали зимой и весной. Сколько рабочих на предприятии?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: В трех палатках у продавщиц поровну мандаринов. Когда каждая продала по 600 мандаринов, то у всех вместе осталось столько, сколько было первоначально у каждой. Сколько же это?</h4>
+                    <p></p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Найдите значение выражения</h4>
+                    <p>$$
+                        (-5,8)^2 - 14,28 \cdot (-\frac{5}{7}) - 3,04
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Решите уравнение</h4>
+                    <p>$$
+                        -\frac{7}{15}y \cdot (-3\frac{3}{7}) \cdot 3,4 = -16,32
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Упростите выражение</h4>
+                    <p>$$
+                        \frac{4}{15} (1\frac{1}{2}p - 4,5) - 1\frac{1}{2} (2\frac{2}{7}p + 5,4)
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: 30% класса и еще 5 человек поехали в кино, а оставшиеся 3/8 класса и еще 4 человека на экскурсию. Сколько человек в классе?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: Некий сказал другу: "Дай мне 100 рупий и я буду вдвое богаче тебя". Другой ответил: "Дай ты мне только 10, и я стану в 6 раз богаче тебя". Сколько было у каждого?</h4>
+                    <p></p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Вычислите</h4>
+                    <p>$$
+                        (9 - 1\frac{1}{3} \cdot 4\frac{2}{7}) \cdot \frac{21}{46}
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Решите уравнение</h4>
+                    <p>$$
+                        630 : (8x - 42x) + 53 = 68
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Среднее арифметическое 4-х чисел равно 3, а 3 из них $1\frac{5}{9}$, найти четвертое число?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: 14 дней 9 рабочих выполнили $\frac{4}{12}$ задания. Сколько рабочих необходимо нанять дополнительно чтобы выполнить оставшуюся часть задания за 2 дня?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: В 3-х бидонах 80л молока. После того как из каждого бидона продали по 20л молока, в одном осталось в 3 раза меньше чем в каждом из двух других. Сколько литров молока было в каждом бидоне первоначально?</h4>
+                    <p></p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Вычислите</h4>
+                    <p>$$
+                        104,8 - 1,842 : (0,093 + 4,2 \cdot 0,035)
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Решите уравнение</h4>
+                    <p>$$
+                        12\frac{3}{17} + x + 8\frac{16}{17} = 23\frac{2}{17}
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: За три дня вспахали 192 га земли. В первый день вспахали 62,5% этой площади, во второй день 2/3 оставшейся площади. Сколько гектаров земли вспахали в 3 день?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: Из пункта А в пункт В вышел пешеход со скоростью 4,8 км/ч. Одновременно с ним из В в А выехал велосипедист со скоростью 10 км/ч, который доехал до А, повернул назад и поехал с той же скоростью. Догонит ли велосипедист пешехода до его прихода в В?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: По плану должны были построить 750 квартир, а построили 855. Сколько процентов плана было выполнено?</h4>
+                    <p></p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Вычислите</h4>
+                    <p>$$
+                        (2,678 \cdot 1,3 - 2) \cdot 3\frac{1}{3} + 0,3 \cdot \frac{7}{15}
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Решите пропорцию: $x : 13 = 4 : 5$.</h4>
+                    <p>$$
+                        x : 13 = 4 : 5
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Сначала Витя прочитал 60% всей книги, а потом 40% остатка. Сколько процентов книги осталось прочитать Вите?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: Расстояние между 2-мя пунктами равное 36 км, проплыли лодки по течению за 30 мин, а против течения за 40 мин. Определите скорость течения реки. За сколько часов это расстояние проплывут плоты?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: Производительность труда повысили на 25%. На сколько процентов уменьшится время выполнения задания?</h4>
+                    <p></p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Вычислите</h4>
+                    <p>$$
+                        20\frac{7}{9} : 4\frac{2}{5} - \frac{5}{9}
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Решите уравнение</h4>
+                    <p>$$
+                        5 : x = 2 : 3
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Заготовили 32,5 т овса. Сначала израсходовали 0,4 этого запаса, а потом еще $\frac{2}{3}$ остатка. Сколько тонн овса осталось после этого?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: Собака усмотрела зайца в 150 саженях зайца, который пробегает в 2 минуты по 500 сажен, а собака в 5 минут - 1300 сажен. Через сколько минут собака догонит зайца?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: За 3 года Вася стал старше на 25%, сколько теперь лет Васе?</h4>
+                    <p></p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Вычислите</h4>
+                    <p>$$
+                        208,6 - 3,612 : (0,015 + 0,075 : 5,4)
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Решите уравнение</h4>
+                    <p>$$
+                        15\frac{4}{19} + x + 3\frac{17}{19} = 21\frac{2}{19}
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Сад занимает 80 га. Яблони занимают 58,5% этой площади, а вишни 39%. На сколько гектаров плпод вишнями меньше площади под яблонями.</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: Пассажирский поезд идет вслед за товарным. Скорость пассажирского поезда 64,3 км/ч, а скорость товарного поезда 42,7 км/ч. Сейчас между ними 14,88 км. Какое расстояние было между поездами 0,7 часа тому назад?</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: Две противоположные стороны прямоугольника увеличили на 20%, две другие уменьшили на 10%. На сколько процентов увеличилась площадь прямоугольника?</h4>
+                    <p></p>
+                </div>
+            </section>
+            <h2>Карточка с задачами</h2>
+            <section class="math-card">
+                <div class="math-problem">
+                    <h4>Задача 1: Вычислите</h4>
+                    <p>$$
+                        3\frac{3}{4} : 0,03 - 4,52 \cdot 8\frac{1}{2}
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 2: Решите пропорцию: $6x : 18 = 5 : 7$.</h4>
+                    <p>$$
+                        6x : 5 = 18 : 7
+                    $$</p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 3: Турист прошел за три дня 32 км. В первый день он прошел 37,5% пути, во второй день $\frac{2}{5}$ остатка. Сколько километров пути прошел турист в третий день.</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 4: Колонна автобусов с детьми длиной 1 км двигалась по шоссе со скоростью 50 км/ч. Автоинспектору, машина которого замыкала колонну, понадобилось подъехать к головному автобусу. Сколько минут уйдет у автоиспектора на путь туда и обратно, если он будет ехать со скоростью 70 км/ч.</h4>
+                    <p></p>
+                </div>
+
+                <div class="math-problem">
+                    <h4>Задача 5: В результате замены некоторых деталей удалось увеличить мощность двигателя, но при этом его масса увеличилась с 66 кг до 75,57 кг. </h4>
+                    <p></p>
+                </div>
+            </section>
+        </section>
+
+        <section id="quiz-area" style="display: none;">
+            <h2>Тест по Математике</h2>
+            <p>Проверьте свои знания, ответив на следующие вопросы. После завершения теста вы увидите свой результат.</p>
+
+            <form id="math-quiz">
+                <section class="quiz-question">
+                    <h4>Вопрос 1: Сколько будет 5 + 7?</h4>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q1" value="a"> 10</label>
+                        <label><input type="radio" name="q1" value="b"> 12</label>
+                        <label><input type="radio" name="q1" value="c"> 14</label>
+                        <label><input type="radio" name="q1" value="d"> 11</label>
+                    </div>
+                </section>
+
+                <section class="quiz-question">
+                    <h4>Вопрос 2: Чему равно x в уравнении 2x - 4 = 6?</h4>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q2" value="a"> 3</label>
+                        <label><input type="radio" name="q2" value="b"> 4</label>
+                        <label><input type="radio" name="q2" value="c"> 5</label>
+                        <label><input type="radio" name="q2" value="d"> 6</label>
+                    </div>
+                </section>
+
+                <section class="quiz-question">
+                    <h4>Вопрос 3: Как называется фигура с тремя сторонами?</h4>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q3" value="a"> Квадрат</label>
+                        <label><input type="radio" name="q3" value="b"> Круг</label>
+                        <label><input type="radio" name="q3" value="c"> Треугольник</label>
+                        <label><input type="radio" name="q3" value="d"> Прямоугольник</label>
+                    </div>
+                </section>
+
+                <button type="submit" class="quiz-submit-button">Завершить тест</button>
+            </form>
+
+            <section id="quiz-results">
+                <h2>Результаты теста</h2>
+                <p id="results-message"></p>
+            </section>
+        </section>
+
+        <section id="contact-area" style="display: none;">
+            <h2>Свяжитесь с нами</h2>
+            <p>Если у вас есть вопросы или предложения, пожалуйста, заполните форму ниже и отправьте нам сообщение.</p>
+            <form id="contact-form">
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Сообщение:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Отправить сообщение</button>
+            </form>
+        </section>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Математический Курс, Copyright © 2024</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('header nav a');
+            const contentSections = {
+                'home': document.getElementById('home-area'),
+                'lessons': document.getElementById('lessons-area'),
+                'problems': document.getElementById('problems-area'),
+                'quiz': document.getElementById('quiz-area'),
+                'contact': document.getElementById('contact-area')
+            };
+            let currentSection = 'home';
+
+            function showSection(sectionId) {
+                for (const section in contentSections) {
+                    contentSections[section].style.display = 'none';
+                }
+                contentSections[sectionId].style.display = 'block';
+                currentSection = sectionId;
+
+                // Update navigation highlight
+                navLinks.forEach(link => {
+                    link.parentNode.classList.remove('current');
+                    if (link.getAttribute('data-section') === sectionId) {
+                        link.parentNode.classList.add('current');
+                    }
+                });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+                });
+            });
+
+            // Initial section to show
+            showSection(currentSection);
+
+            // Quiz Submission
+            const quizForm = document.getElementById('math-quiz');
+            const quizResultsSection = document.getElementById('quiz-results');
+            const resultsMessage = document.getElementById('results-message');
+
+            quizForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                let score = 0;
+                const answers = {
+                    q1: 'b', // Correct answer for question 1
+                    q2: 'c', // Correct answer for question 2
+                    q3: 'c'  // Correct answer for question 3
+                };
+
+                for (let question in answers) {
+                    let selectedAnswer = document.querySelector(`input[name="${question}"]:checked`);
+                    if (selectedAnswer && selectedAnswer.value === answers[question]) {
+                        score++;
+                    }
+                }
+
+                resultsMessage.textContent = `Вы набрали ${score} из 3 баллов.`;
+                quizResultsSection.style.display = 'block';
+                quizForm.style.display = 'none'; // Hide the quiz form after submission
+            });
+
+            // Contact Form Submission (Basic - No backend)
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                alert('Сообщение отправлено! (Это демонстрация, данные не отправляются на сервер).');
+                contactForm.reset(); // Clear the form
+            });
+        });
+    </script>
+</body>
+</html>
